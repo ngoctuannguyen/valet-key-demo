@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Generate SAS Token</title>
+    <style>
+        body { font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; padding: 20px; }
+        form { display: flex; flex-direction: column; }
+        label { margin-top: 10px; }
+        input, button { padding: 10px; margin-top: 5px; }
+    </style>
+</head>
+<body>
+    <h1>Generate SAS Token</h1>
+    <form method="post">
+        {% csrf_token %}
+        <label for="container_name">Container Name:</label>
+        <input type="text" id="container_name" name="container_name" required>
+
+        <label for="blob_name">Blob Name:</label>
+        <input type="text" id="blob_name" name="blob_name" required>
+
+        <label for="expiry_in_minutes">Expiry Time (in minutes):</label>
+        <input type="number" id="expiry_in_minutes" name="expiry_in_minutes" min="1" value="10" required>
+
+        <button type="submit">Generate SAS Token</button>
+    </form>
+
+    {% if sas_token %}
+    <h2>Generated SAS Token</h2>
+    <textarea rows="4" readonly>{{ sas_token }}</textarea>
+    {% endif %}
+</body>
+</html>

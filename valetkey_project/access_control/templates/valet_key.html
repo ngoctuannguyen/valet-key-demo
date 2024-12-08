@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Generate Valet Key</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <script>
+        function copyToClipboard() {
+            var valetKeyText = document.getElementById("valetKeyText");
+            navigator.clipboard.writeText(valetKeyText.textContent).then(function() {
+                alert("Valet Key copied to clipboard!");
+            }, function(err) {
+                console.error("Could not copy text: ", err);
+            });
+        }
+    </script>
+</head>
+<body class="bg-light">
+
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <div class="card">
+                <div class="card-header bg-primary text-white text-center">
+                    <h4>Generate Valet Key</h4>
+                </div>
+                <div class="card-body">
+                    <form method="post" action="{% url 'generate_valet_key' %}">
+                        {% csrf_token %}
+                        <div class="form-group">
+                            <label for="file_path"> File Path</label>
+                            <input type="text" class="form-control" id="file_path" name="file_path" required placeholder="Enter File Path">
+                        </div>
+                        <div class="form-group">
+                            <label for="expires_at">Expires At</label>
+                            <input type="datetime-local" class="form-control" id="expires_at" name="expires_at">
+                        </div>
+                        <button type="submit" class="btn btn-primary btn-block">Generate Key</button>
+                    </form>
+                </div>
+                {% if valet_key %}
+                    <div class="card-footer text-center">
+                        <strong>Valet Key:</strong> <span class="text-success" id="valetKeyText">{{ valet_key }}</span>
+                        <p class="text-muted">Expires at: {{ expires_at }}</p>
+                        <button class="btn btn-secondary mt-2" onclick="copyToClipboard()">Copy Valet Key</button>
+                    </div>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>

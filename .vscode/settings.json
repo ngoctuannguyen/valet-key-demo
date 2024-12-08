@@ -1,0 +1,8 @@
+{
+    "python.analysis.extraPaths": [
+        "./valetkey_project/access_control"
+    ],
+    "files.associations": {
+        "iomanip": "cpp"
+    }
+}

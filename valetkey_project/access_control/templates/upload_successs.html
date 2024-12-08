@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Upload Successful</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f9;
+            color: #333;
+            text-align: center;
+            padding: 20px;
+        }
+
+        .container {
+            background-color: white;
+            padding: 30px;
+            margin: 50px auto;
+            border-radius: 10px;
+            max-width: 500px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            color: #4CAF50;
+            margin-bottom: 20px;
+        }
+
+        p {
+            font-size: 16px;
+            line-height: 1.5;
+        }
+
+        a {
+            display: inline-block;
+            margin-top: 20px;
+            padding: 10px 20px;
+            background-color: #4CAF50;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+        }
+
+        a:hover {
+            background-color: #45a049;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Upload Successful!</h1>
+        <p>Your file has been successfully uploaded.</p>
+
+        {% if file_url %}
+        <p><a href="{{ file_url }}" download>Download Your Image</a></p>
+        {% else %}
+        <p>No file URL available.</p>
+        {% endif %}
+
+        <!-- Optional: Link to upload another file -->
+        {% comment %} <a href="{% url 'upload' %}">Upload Another File</a> {% endcomment %}
+        <!-- Adjust the URL to the correct path in your project -->
+
+        <!-- Optional: Link to the homepage or a resource list -->
+        {% comment %} <a href="{% url 'homepage' %}">Go to Homepage</a> {% endcomment %}
+        <!-- Adjust the URL to the correct path in your project -->
+    </div>
+</body>
+</html>
